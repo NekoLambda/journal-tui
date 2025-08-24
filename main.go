@@ -1,16 +1,15 @@
 package main
 
 import (
-	"fmt"
+	"log"
 
-	"github.com/NekoLambda/journal-tui/ui"
+	"github.com/NekoLambda/journal-tui/internal/model"
 	tea "github.com/charmbracelet/bubbletea"
 )
 
 func main() {
-	p := tea.NewProgram(ui.NewModel())
+	p := tea.NewProgram(model.New())
 	if err := p.Start(); err != nil {
-		fmt.Println("Error starting app:", err)
-		return
+		log.Fatal(err)
 	}
 }
