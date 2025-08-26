@@ -14,7 +14,7 @@ A heavily work-in-progress terminal-based journaling and note-taking app built w
 - 📝 Create, view, edit, and delete notes
 - 🔍 Fuzzy search (title + content)
 - 📤 Export notes to plain text
- 🖥️ Minimal TUI interface with [Charm](https://charm.sh) ecosystem
+- 🖥️ Minimal TUI interface with [Charm](https://charm.sh) ecosystem
 - ❓ Help and About screens for quick reference
 
 ## 📦 Project Structure

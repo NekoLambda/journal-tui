@@ -16,7 +16,7 @@ import (
 type Entry struct {
 	Title    string
 	Filename string
-	Content  string
+	Content  string // Populate when loading
 	ModTime  time.Time
 	Tags     []string
 }
@@ -199,13 +199,12 @@ func LoadEntryContent(e Entry) (string, error) {
 	return string(bytes), nil
 }
 
+// DeleteEntry removes the entry file and updates metadata
 func DeleteEntry(e Entry) error {
-	// remove file
 	path := filepath.Join(dataDir, e.Filename)
 	if err := os.Remove(path); err != nil {
 		return err
 	}
-	// update metadata
 	mp, _ := loadMetadata()
 	delete(mp, e.Filename)
 	_ = saveMetadata(mp)
