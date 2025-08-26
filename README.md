@@ -1,4 +1,8 @@
 ---
+[Detik.com](https://detik.com/)
+## 📄 Placeholder README.md
+
+Here’s a clean draft for GitHub:
 
 # Journal-TUI
 
@@ -15,6 +19,7 @@ A heavily work-in-progress terminal-based journaling and note-taking app built w
 
 ## 📦 Project Structure
 
+```markdown
 ```
 ```
 journal-tui/
