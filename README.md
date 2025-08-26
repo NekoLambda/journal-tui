@@ -27,17 +27,22 @@ journal-tui/
 │   └── journal-tui/
 │       └── main.go          # entrypoint
 ├── internal/
-│   ├── model/
+│   ├── model/               
 │   │   └── model.go         # state machine, modes, key handling
 │   └── storage/
-│       ├── storage.go       # file ops (save, edit, delete, etc.)
-│       └── storage_test.go  # unit tests
-├── ui/
-│   ├── components/          # reusable widgets (note list, dialogs, help view)
-│   │   ├── list.go
-│   │   ├── modal.go
-│   │   └── help.go
+│       ├── storage.go       # File ops (save, edit, delete, etc.)
+│       └── storage_test.go  # Unit tests
+├── ui/                      # All Terminal UI related code
+│   ├── components/          # Reusable widgets (note list, dialogs, help view)
+│   │   ├── list.go          # Entry list (using Bubbles list)
+│   │   ├── modal.go         # Reusable modal dialogs
+│   │   ├── input.go         # Text input form
+│   │   ├── preview.go       # Markdown preview (Glow)
+│   │   └── help.go          # Help and About view
 │   └── styles.go            # Lipgloss themes, colors, spacing
+├── scripts/                 # Optional shell helpers (using Gum)
+│   └── quicknote.sh         # Example quick journaling script
+│
 ├── go.mod
 └── go.sum
 ```

@@ -7,10 +7,10 @@ import (
 	"testing"
 )
 
-func TestSafeFilename(t *testing.T) {
-	got := safeFilename("Hello World!!")
-	if got != "hello_world" {
-		t.Errorf("expected hello_world, got %s", got)
+func TestSlugify(t *testing.T) {
+	got := slugify("Hello World!!")
+	if got != "hello-world" {
+		t.Errorf("expected hello-world, got %s", got)
 	}
 }
 
@@ -40,12 +40,38 @@ func TestExportEntry(t *testing.T) {
 		t.Fatalf("NewEntry failed: %v", err)
 	}
 	path := filepath.Join("data", entry.Filename)
-	if err := ExportEntry(path); err != nil {
+	exportPath, err := ExportEntry(path)
+	if err != nil {
 		t.Fatalf("ExportEntry failed: %v", err)
 	}
-	files, err := os.ReadDir("exports")
-	if err != nil || len(files) == 0 {
-		t.Fatalf("expected export file, got none")
+	if _, err := os.Stat(exportPath); err != nil {
+		t.Fatalf("expected export file at %s, got error: %v", exportPath, err)
+	}
+}
+
+func TestEditEntry(t *testing.T) {
+	// Create a temporary file for testing
+	tmpFile, err := os.CreateTemp("", "test-*.md")
+	if err != nil {
+		t.Fatalf("Failed to create temp file: %v", err)
+	}
+	defer os.Remove(tmpFile.Name())
+
+	// Set test editor environment
+	oldEditor := os.Getenv("EDITOR")
+	os.Setenv("EDITOR", "echo") // Use echo as a mock editor that does nothing
+	defer os.Setenv("EDITOR", oldEditor)
+
+	// Test editing
+	err = EditEntry(tmpFile.Name())
+	if err != nil {
+		t.Errorf("EditEntry failed: %v", err)
+	}
+
+	// Test with invalid path
+	err = EditEntry("/path/that/does/not/exist")
+	if err == nil {
+		t.Error("Expected error for non-existent file, got nil")
 	}
 }
 

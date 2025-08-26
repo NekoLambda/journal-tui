@@ -21,8 +21,10 @@ type Entry struct {
 	Tags     []string
 }
 
-const dataDir = "data"
-const metaFile = "metadata.json"
+const (
+	dataDir  = "data"
+	metaFile = "metadata.json"
+)
 
 // EnsureDataDir makes sure data dir exists
 func EnsureDataDir() error {
@@ -211,6 +213,69 @@ func DeleteEntry(e Entry) error {
 	return nil
 }
 
+// NewEntry creates a new entry with the given title and content
+func NewEntry(title string, content string) (Entry, error) {
+	if err := EnsureDataDir(); err != nil {
+		return Entry{}, err
+	}
+
+	ts := time.Now().Format("20060102-150405")
+	filename := fmt.Sprintf("%s-%s.md", ts, slugify(title))
+	path := filepath.Join(dataDir, filename)
+
+	f, err := os.Create(path)
+	if err != nil {
+		return Entry{}, err
+	}
+	defer f.Close()
+
+	// Write markdown with title and content
+	_, err = f.WriteString("# " + title + "\n\n" + content)
+	if err != nil {
+		return Entry{}, err
+	}
+
+	fi, _ := f.Stat()
+	return Entry{
+		Title:    title,
+		Filename: filename,
+		Content:  content,
+		ModTime:  fi.ModTime(),
+		Tags:     []string{},
+	}, nil
+}
+
+// ExportEntry exports a single entry to exports directory
+func ExportEntry(path string) (string, error) {
+	if err := os.MkdirAll("exports", 0755); err != nil {
+		return "", fmt.Errorf("failed to create exports dir: %w", err)
+	}
+
+	// Generate export filename with timestamp
+	exportPath := filepath.Join("exports",
+		fmt.Sprintf("journal-export-%s.zip",
+			time.Now().Format("20060102-150405")))
+
+	out, err := os.Create(exportPath)
+	if err != nil {
+		return "", fmt.Errorf("failed to create export file: %w", err)
+	}
+	defer out.Close()
+
+	// Copy the entry
+	src, err := os.Open(path)
+	if err != nil {
+		return "", fmt.Errorf("failed to open entry: %w", err)
+	}
+	defer src.Close()
+
+	if _, err := io.Copy(out, src); err != nil {
+		return "", fmt.Errorf("failed to copy entry: %w", err)
+	}
+
+	return exportPath, nil
+}
+
 // ExportAll zips every .md file in data/ into exports/<timestamp>.zip
 func ExportAll() (string, error) {
 	if err := EnsureDataDir(); err != nil {
@@ -263,3 +328,5 @@ func ExportAll() (string, error) {
 	}
 	return zipPath, nil
 }
+
+// EditEntry opens the entry file in $EDITOR

@@ -16,6 +16,7 @@ import (
 	"github.com/lithammer/fuzzysearch/fuzzy"
 
 	"github.com/NekoLambda/journal-tui/internal/storage"
+	"github.com/NekoLambda/journal-tui/ui/styles"
 )
 
 type Mode int
@@ -66,12 +67,7 @@ func New() Model {
 	vp := viewport.New(80, 12)
 	vp.SetContent("")
 
-	// styles
-	header := lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#FF79C6"))
-	selected := lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#50FA7B"))
-	normal := lipgloss.NewStyle().Foreground(lipgloss.Color("#F8F8F2"))
-	help := lipgloss.NewStyle().Foreground(lipgloss.Color("#6272A4"))
-	input := lipgloss.NewStyle().Border(lipgloss.NormalBorder()).Padding(0, 1)
+	// styles are assigned directly in the Model struct initialization
 
 	m := Model{
 		mode:          ModeList,
@@ -80,11 +76,11 @@ func New() Model {
 		ti:            ti,
 		searchTI:      search,
 		vp:            vp,
-		headerStyle:   header,
-		selectedStyle: selected,
-		normalStyle:   normal,
-		helpStyle:     help,
-		inputStyle:    input,
+		headerStyle:   styles.HeaderStyle,
+		selectedStyle: styles.SelectedStyle,
+		normalStyle:   styles.NormalStyle,
+		helpStyle:     styles.HelpStyle,
+		inputStyle:    styles.InputStyle,
 	}
 	return m
 }
