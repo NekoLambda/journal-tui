@@ -1,10 +1,5 @@
 ---
 
-## 📄 Placeholder README.md
-
-Here’s a clean draft for GitHub:
-
-```markdown
 # Journal-TUI
 
 A heavily work-in-progress terminal-based journaling and note-taking app built with [Bubble Tea](https://github.com/charmbracelet/bubbletea).
@@ -15,7 +10,7 @@ A heavily work-in-progress terminal-based journaling and note-taking app built w
 - 📝 Create, view, edit, and delete notes
 - 🔍 Fuzzy search (title + content)
 - 📤 Export notes to plain text
-- 🖥️ Minimal TUI interface with [Charm] (https://charm.sh) ecosystem
+ 🖥️ Minimal TUI interface with [Charm](https://charm.sh) ecosystem
 - ❓ Help and About screens for quick reference
 
 ## 📦 Project Structure
