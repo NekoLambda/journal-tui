@@ -21,11 +21,11 @@ A heavily work-in-progress terminal-based journaling and note-taking app built w
 ## 📦 Project Structure
 
 ```
-
+```
 journal-tui/
 ├── cmd/
 │   └── journal-tui/
-│       └── main.go          # entrypoint and main environment
+│       └── main.go          # entrypoint
 ├── internal/
 │   ├── model/
 │   │   └── model.go         # state machine, modes, key handling
@@ -40,9 +40,7 @@ journal-tui/
 │   └── styles.go            # Lipgloss themes, colors, spacing
 ├── go.mod
 └── go.sum
-
-
-````
+```
 
 ## 🚀 Getting Started
 
@@ -71,29 +69,6 @@ Run tests:
 
 ```bash
 go test ./internal/storage/...
-```
-
-## 📂 Project Tree
-
-```
-journal-tui/
-├── cmd/
-│   └── journal/
-│       └── main.go          # entrypoint
-├── internal/
-│   ├── model/
-│   │   └── model.go         # state machine, modes, key handling
-│   └── storage/
-│       ├── storage.go       # file ops (save, edit, delete, etc.)
-│       └── storage_test.go  # unit tests
-├── ui/
-│   ├── components/          # reusable widgets (note list, dialogs, help view)
-│   │   ├── list.go
-│   │   ├── modal.go
-│   │   └── help.go
-│   └── styles.go            # Lipgloss themes, colors, spacing
-├── go.mod
-└── go.sum
 ```
 
 ## 🔮 Roadmap
