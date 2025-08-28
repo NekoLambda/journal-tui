@@ -16,7 +16,7 @@ import (
 	"github.com/lithammer/fuzzysearch/fuzzy"
 
 	"github.com/NekoLambda/journal-tui/internal/storage"
-	"github.com/NekoLambda/journal-tui/ui/styles"
+	"github.com/NekoLambda/journal-tui/ui"
 )
 
 type Mode int
@@ -76,11 +76,11 @@ func New() Model {
 		ti:            ti,
 		searchTI:      search,
 		vp:            vp,
-		headerStyle:   styles.HeaderStyle,
-		selectedStyle: styles.SelectedStyle,
-		normalStyle:   styles.NormalStyle,
-		helpStyle:     styles.HelpStyle,
-		inputStyle:    styles.InputStyle,
+		headerStyle:   ui.HeaderStyle,
+		selectedStyle: ui.SelectedStyle,
+		normalStyle:   ui.NormalStyle,
+		helpStyle:     ui.HelpStyle,
+		inputStyle:    ui.InputStyle,
 	}
 	return m
 }

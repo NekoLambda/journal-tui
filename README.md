@@ -1,8 +1,4 @@
 ---
-[Detik.com](https://detik.com/)
-## 📄 Placeholder README.md
-
-Here’s a clean draft for GitHub:
 
 # Journal-TUI
 
